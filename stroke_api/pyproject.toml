@@ -9,7 +9,7 @@ readme = "README.md"
 python = "^3.12"
 pandas = "^2.3.1"
 plotly = "^6.2.0"
-fastapi = "^0.116.1"
+fastapi = {extras = ["standard"], version = "^0.116.1"}
 streamlit = "^1.47.1"
 matplot = "^0.1.9"
 
