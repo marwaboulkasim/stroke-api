@@ -1,5 +1,6 @@
 from fastapi import APIRouter
-from stroke_api import filters
+from typing import Optional
+import filters
 
 router = APIRouter()
 
@@ -7,11 +8,23 @@ router = APIRouter()
 def read_root():
     return {"message": "Bienvenue sur l'API Stroke Prediction !"}
 
-# TODO décommenter et compléter
-#@router.get("/patients/")
-#def get_patients(gender: str = None, stroke: int = None, max_age: float = None):
-    #filtered_df = 
-    #return filtered_df.to_dict(orient="records")
+@router.get("/patients/")
+def get_patients(
+    gender: Optional[str] = None,
+    stroke: Optional[int] = None,
+    max_age: Optional[float] = None
+):
+    patients = filters.filter_patients(
+        gender=gender,
+        stroke=stroke,
+        max_age=max_age
+    )
+    return patients.to_dict(orient='records')
+
+
+
+
+   
 
 # TODO décommenter et compléter
 #@router.get("/patients/{patient_id}")
