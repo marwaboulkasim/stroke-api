@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import pandas as pd
 import numpy as np
-from api import router
+from stroke_api.api import router
 
 # Création d'un objet FastAPI
 app = FastAPI(title="Stroke Dataset API")

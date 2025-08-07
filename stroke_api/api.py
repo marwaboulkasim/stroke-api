@@ -20,7 +20,8 @@ def get_patients(
         stroke=stroke,
         max_age=max_age
     )
-    return patients.to_dict(orient='records')
+    return patients
+
 
 
 
