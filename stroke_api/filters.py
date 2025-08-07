@@ -4,7 +4,8 @@ import pandas as pd
 
 # Chargement des données (une fois)
 df = pd.read_csv('df_final_test.csv')
-
+df.drop(columns=['Unnamed: 0'], inplace=True)
+print(df)
 
 # Tester l'app avec :
 # poetry run fastapi dev stroke_api/main.py
