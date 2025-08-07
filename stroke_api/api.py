@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from stroke_api import filters
 
 router = APIRouter()
@@ -21,12 +21,20 @@ def get_patients(gender: str = None, stroke: int = None, max_age: float = None):
 # TODO décommenter et compléter
 @router.get("/patients/{patient_id}")
 def get_patient_id(patient_id: int):
-    patient_data = filters.df[filters.df['id'] == patient_id]
-    if patient_data.empty:
-        print('Patient non trouvé.')
-    else:
-        return patient_data.to_dict(orient='records')[0]
+    patient_data = filters.filter_id(
+        stroke_data_df=filters.df,
+        id=patient_id
+    )
+
+    if patient_data is None:
+        raise HTTPException(status_code=404, detail="Patient non trouvé.")
+
+    return patient_data
     # Gérer le cas où l'id de patient passé en paramètre n'existe pas
 
 
 #  Ajout de la route stats 
+
+@router.get('/stats/')
+def get_stats():
+    pass

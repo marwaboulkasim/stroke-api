@@ -22,7 +22,20 @@ def filter_patient(stroke_data_df: pd.DataFrame, stroke: Optional[int] = None, g
     if gender is not None:
         filtered_df = filtered_df[filtered_df['gender'] == gender]
     return filtered_df.to_dict(orient='records')
-# Ensuite faire appel à ces fonctions dans le fichier api.py où sont définies les routes.
 
+def filter_id(stroke_data_df: pd.DataFrame, id: int) -> Optional[dict]:
+    filtered_df = stroke_data_df[stroke_data_df['id'] == id]
+    
+    if filtered_df.empty:
+        return None  # Rien trouvé
+
+    return filtered_df.to_dict(orient='records')[0] 
+# Ensuite faire appel à ces fonctions dans le fichier api.py où sont définies les routes.
+def filter_stats(stroke_data_df: pd.DataFrame, 
+                gender: Optional[str] = None, 
+                age: Optional[int] = None,
+                bmi: Optional[float] = None):
+    filtered_df = None
+    pass
 # Ajouter les fonctions de filtrage pour les autres routes.
 
